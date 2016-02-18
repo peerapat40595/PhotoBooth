@@ -46,5 +46,26 @@ var CameraTool = {
         this.element.html("");
         this.status = "uninit";
         localMediaStream.stop();
+    },
+    clearCanvas: function(id){
+        var canvas = $("#"+id);
+        this.status = "uninit";
+        canvas[0].getContext("2d").clearRect(0, 0, canvas.width(), canvas.height());
     }
 };
+function countDown(second){
+    //console.log(second);
+    if(second > 0) {
+        $("#countdown").html(second);
+        setTimeout(function(){
+            countDown(second - 1);
+        }, 1000);
+    }
+    else if(second == 0){
+        $("#countdown").html("");
+        CameraTool.captureTo("photo");
+        CameraTool.hideCamera("camera");
+        $("#camera-control > button").html("Retake");
+        //console.log("hello");
+    }
+}
