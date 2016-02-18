@@ -54,7 +54,6 @@ var CameraTool = {
     }
 };
 function countDown(second){
-    //console.log(second);
     if(second > 0) {
         $("#countdown").html(second);
         setTimeout(function(){
@@ -66,6 +65,5 @@ function countDown(second){
         CameraTool.captureTo("photo");
         CameraTool.hideCamera("camera");
         $("#camera-control > button").html("Retake");
-        //console.log("hello");
     }
 }
