@@ -5,6 +5,7 @@ var CameraTool = {
     element: undefined,
     video:undefined,
     status:"uninit",
+    localMediaStream:undefined,
     state: function(){
         return this.state;
     },
@@ -21,11 +22,12 @@ var CameraTool = {
 
         if (navigator.getUserMedia) {
             navigator.getUserMedia(
-                {audio: true, video: true},
+                {audio: false, video: true},
                 function (stream) {
                     CameraTool.video.attr("src", window.URL.createObjectURL(stream));
                     CameraTool.video[0].play();
                     CameraTool.status = "on";
+                    localMediaStream = stream.getTracks()[0];
                 }, handleInitError);
         } else {
             handleInitError();
@@ -43,5 +45,6 @@ var CameraTool = {
     hideCamera: function(){
         this.element.html("");
         this.status = "uninit";
+        localMediaStream.stop();
     }
 };
